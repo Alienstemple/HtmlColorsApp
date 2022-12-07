@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HtmlColorsApp</string>
+    <string name="recycler_item_text">Элемент списка</string>
 </resources>

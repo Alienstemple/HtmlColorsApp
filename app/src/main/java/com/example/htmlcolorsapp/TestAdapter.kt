@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.htmlcolorsapp.databinding.RowItemBinding
 
-class TestAdapter(private val dataSet: Array<String>) :
+class TestAdapter(private val dataSet: ArrayList<Plant>) :
     RecyclerView.Adapter<TestAdapter.ViewHolder>() {
 
     val plantList = ArrayList<Plant>()

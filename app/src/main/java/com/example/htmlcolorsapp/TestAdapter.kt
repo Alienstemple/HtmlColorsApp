@@ -10,7 +10,7 @@ import com.example.htmlcolorsapp.databinding.RowItemBinding
 class TestAdapter(private val dataSet: ArrayList<Plant>) :
     RecyclerView.Adapter<TestAdapter.ViewHolder>() {
 
-    val plantList = ArrayList<Plant>()
+    val plantList = dataSet
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val rowItemBinding = RowItemBinding.bind(view)
@@ -36,11 +36,6 @@ class TestAdapter(private val dataSet: ArrayList<Plant>) :
         holder.bind(plantList[position])
     }
 
-    override fun getItemCount() = dataSet.size
-
-    fun addPlant(plant: Plant) {
-        plantList.add(plant)
-        notifyDataSetChanged()  // TODO Is necessary?
-    }
+    override fun getItemCount() = plantList.size
 
 }

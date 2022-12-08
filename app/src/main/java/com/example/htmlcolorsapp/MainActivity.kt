@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var plantAdapter: TestAdapter
 
+    lateinit var colorAdapter: HtmlColorAdapter
+
     private val imageIdList = listOf(
         R.drawable.plant1,
         R.drawable.plant2
@@ -28,10 +30,17 @@ class MainActivity : AppCompatActivity() {
         )
         plantAdapter = TestAdapter(plantList)
 
-//        rowItemBinding = RowItemBinding.inflate(layoutInflater)  // initialize row item with layout
+        // Create list of colors and add it to Adapter
+        var htmlColorList = arrayListOf(
+            HtmlColor("red", "#FF0000", "255, 0, 0"),
+            HtmlColor("green", "##00FF00", "0, 255, 0"),
+            HtmlColor("blue", "##0000FF", "0, 0, 255"),
+        )
+        colorAdapter = HtmlColorAdapter(htmlColorList)
+
         mainBinding.apply {
             testRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-            testRecyclerView.adapter = plantAdapter
+            testRecyclerView.adapter = colorAdapter  // pass adapter to RecyclerView
         }
     }
 }

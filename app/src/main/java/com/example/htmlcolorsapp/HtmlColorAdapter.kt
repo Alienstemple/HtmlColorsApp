@@ -14,7 +14,7 @@ class HtmlColorAdapter(private val colorArrayList: ArrayList<HtmlColor>):
 
         fun bind(htmlColor: HtmlColor) = with(colorItemBinding){  // with -- instead of parameter
             // or .rgb(1,1,1), or .valueOf(0xffff0000)
-            colorItemFrameLayout.setBackgroundColor(Color.parseColor("#FFF0000"))   // TODO from color array list
+            colorItemFrameLayout.setBackgroundColor(Color.parseColor("#FFF000")) // TODO from color array list
         }
     }
 
@@ -26,7 +26,7 @@ class HtmlColorAdapter(private val colorArrayList: ArrayList<HtmlColor>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(colorArrayList[position])
     }
 
     override fun getItemCount() = colorArrayList.size

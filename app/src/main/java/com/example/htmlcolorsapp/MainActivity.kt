@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             HtmlColor("green", "#00FF00", "0, 255, 0"),
             HtmlColor("blue", "#0000FF", "0, 0, 255"),
         )
-        colorAdapter = HtmlColorAdapter(htmlColorList)
+        colorAdapter = HtmlColorAdapter()
 
         mainBinding.apply {
             // Access our RecyclerView from layout binding
@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
             // Variant 2:
 //            getDrawable(R.drawable.color_item_divider)?.let { dr -> dividerItemDecoration.setDrawable(dr) }
 
-//            val dividerItemDecor: DividerItemDecoration
-//            dividerItemDecor.drawable
             testRecyclerView.addItemDecoration(dividerItemDecoration)
         }
     }

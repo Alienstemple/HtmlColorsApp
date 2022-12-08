@@ -1,34 +1,22 @@
 package com.example.htmlcolorsapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.htmlcolorsapp.databinding.ActivityMainBinding
-import com.example.htmlcolorsapp.databinding.RowItemBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var mainBinding: ActivityMainBinding
 
-    lateinit var plantAdapter: TestAdapter
-
     lateinit var colorAdapter: HtmlColorAdapter
-
-    private val imageIdList = listOf(
-        R.drawable.plant1,
-        R.drawable.plant2
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
-
-        var plantList = arrayListOf<Plant>(
-            Plant(imageIdList[0], "Plant 1"),
-            Plant(imageIdList[1], "Plant 2")
-        )
-        plantAdapter = TestAdapter(plantList)
 
         // Create list of colors and add it to Adapter
         var htmlColorList = arrayListOf(
@@ -39,8 +27,19 @@ class MainActivity : AppCompatActivity() {
         colorAdapter = HtmlColorAdapter(htmlColorList)
 
         mainBinding.apply {
+            // Access our RecyclerView from layout binding
             testRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
             testRecyclerView.adapter = colorAdapter  // pass adapter to RecyclerView
+
+            val dividerItemDecoration = DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
+            ResourcesCompat.getDrawable(resources, R.drawable.color_item_divider, null)
+                ?.let { drawable -> dividerItemDecoration.setDrawable(drawable) }
+            // Variant 2:
+//            getDrawable(R.drawable.color_item_divider)?.let { dr -> dividerItemDecoration.setDrawable(dr) }
+
+//            val dividerItemDecor: DividerItemDecoration
+//            dividerItemDecor.drawable
+            testRecyclerView.addItemDecoration(dividerItemDecoration)
         }
     }
 }

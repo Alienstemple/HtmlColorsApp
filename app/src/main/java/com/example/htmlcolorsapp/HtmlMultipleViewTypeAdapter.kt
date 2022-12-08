@@ -16,7 +16,7 @@ class HtmlMultipleViewTypeAdapter:
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val colorItemBinding = MainColorItemBinding.bind(view)  // step 1 -- bind
 
-        fun bind(htmlColor: HtmlColor) = with(colorItemBinding){  // with -- instead of parameter
+        private fun bindMainColor(htmlColor: HtmlColorGeneral.HtmlColorMain) = with(colorItemBinding) {
             // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
             colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
             colorHtmlTextView.text = htmlColor.htmlName
@@ -24,11 +24,7 @@ class HtmlMultipleViewTypeAdapter:
             colorRgbTextView.text = htmlColor.rgb
         }
 
-        private fun bindMainColor(htmlColor: HtmlColorGeneral) {
-
-        }
-
-        private fun bindSecondaryColor(htmlColor: HtmlColorGeneral) {
+        private fun bindSecondaryColor(htmlColor: HtmlColorGeneral.HtmlColorSecondary) {
 
         }
 
@@ -48,13 +44,20 @@ class HtmlMultipleViewTypeAdapter:
         }
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.main_color_item, parent, false)  // step 2 -- inflate
+            .inflate(layout, parent, false)  // step 2 -- inflate
 
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(colorGeneralList[position])
+        holder.bind(colorGeneralList[position])  // General fun
+    }
+
+    fun setColorList(colorlist: ArrayList<HtmlColorGeneral>) {   // Setter instead of constructor
+        colorGeneralList.apply {
+            clear()
+            addAll(colorlist)
+        }
     }
 
     override fun getItemCount() = colorGeneralList.size

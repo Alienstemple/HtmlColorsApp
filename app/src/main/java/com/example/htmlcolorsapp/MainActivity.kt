@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainBinding: ActivityMainBinding
 
     lateinit var colorAdapter: HtmlColorAdapter
+    lateinit var multViewColorAdapter: HtmlMultipleViewTypeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +25,23 @@ class MainActivity : AppCompatActivity() {
             HtmlColor("green", "#00FF00", "0, 255, 0"),
             HtmlColor("blue", "#0000FF", "0, 0, 255"),
         )
-        colorAdapter = HtmlColorAdapter()
+        colorAdapter = HtmlColorAdapter(htmlColorList)
+
+        // Create List and Adapter for main and secondary colors
+        var htmlMultiViewColorList = arrayListOf<HtmlColorGeneral>(
+            HtmlColorGeneral.HtmlColorMain("RED", "#FF0000", "255, 0, 0"),  // TODO add secondary colors
+            HtmlColorGeneral.HtmlColorMain("GREEN", "#00FF00", "0, 255, 0"),
+            HtmlColorGeneral.HtmlColorMain("BLUE", "#0000FF", "0, 0, 255"),
+        )
+        multViewColorAdapter = HtmlMultipleViewTypeAdapter()
+        multViewColorAdapter.setColorList(htmlMultiViewColorList)
+
 
         mainBinding.apply {
             // Access our RecyclerView from layout binding
             testRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-            testRecyclerView.adapter = colorAdapter  // pass adapter to RecyclerView
+//            testRecyclerView.adapter = colorAdapter  // pass adapter to RecyclerView
+            testRecyclerView.adapter = multViewColorAdapter
 
             val dividerItemDecoration = DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
             ResourcesCompat.getDrawable(resources, R.drawable.color_item_divider, null)

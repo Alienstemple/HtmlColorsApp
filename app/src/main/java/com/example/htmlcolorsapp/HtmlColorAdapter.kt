@@ -13,8 +13,11 @@ class HtmlColorAdapter(private val colorArrayList: ArrayList<HtmlColor>):
         private val colorItemBinding = ColorItemBinding.bind(view)  // step 1 -- bind
 
         fun bind(htmlColor: HtmlColor) = with(colorItemBinding){  // with -- instead of parameter
-            // or .rgb(1,1,1), or .valueOf(0xffff0000)
-            colorItemFrameLayout.setBackgroundColor(Color.parseColor("#FFF000")) // TODO from color array list
+            // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
+            colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
+            colorHtmlTextView.text = htmlColor.htmlName
+            colorHexTextView.text = htmlColor.hex
+            colorRgbTextView.text = htmlColor.rgb
         }
     }
 

@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         // Create list of colors and add it to Adapter
         var htmlColorList = arrayListOf(
             HtmlColor("red", "#FF0000", "255, 0, 0"),
-            HtmlColor("green", "##00FF00", "0, 255, 0"),
-            HtmlColor("blue", "##0000FF", "0, 0, 255"),
+            HtmlColor("green", "#00FF00", "0, 255, 0"),
+            HtmlColor("blue", "#0000FF", "0, 0, 255"),
         )
         colorAdapter = HtmlColorAdapter(htmlColorList)
 

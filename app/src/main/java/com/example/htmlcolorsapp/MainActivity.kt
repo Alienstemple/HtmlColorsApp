@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         // Create List and Adapter for main and secondary colors
         var htmlMultiViewColorList = arrayListOf<HtmlColorGeneral>(
             HtmlColorGeneral.HtmlColorMain("RED", "#FF0000", "255, 0, 0"),  // TODO add secondary colors
+            HtmlColorGeneral.HtmlColorSecondary("#F4A460"),
             HtmlColorGeneral.HtmlColorMain("GREEN", "#00FF00", "0, 255, 0"),
             HtmlColorGeneral.HtmlColorMain("BLUE", "#0000FF", "0, 0, 255"),
         )

@@ -17,22 +17,24 @@ class HtmlMultipleViewTypeAdapter:
 
     private val colorGeneralList = mutableListOf<HtmlColorGeneral>()   // Not in constructor
 
-    class ViewHolder(view: View, passedViewBinding: ViewBinding): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val TAG = "HtmlMultiViewHolderLog"
-        private val viewBinding: ViewBinding = passedViewBinding
+        private val innerView = view  // TODO is that right???
 
         private fun bindMainColor(htmlColor: HtmlColorGeneral.HtmlColorMain) {
             // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
-            (viewBinding as MainColorItemBinding).colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
+            val viewBinding = MainColorItemBinding.bind(innerView)  // step 2 -- bind
+            viewBinding.colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
             viewBinding.colorHtmlTextView.text = htmlColor.htmlName
             viewBinding.colorHexTextView.text = htmlColor.hex
             viewBinding.colorRgbTextView.text = htmlColor.rgb
         }
 
-        private fun bindSecondaryColor(htmlColor: HtmlColorGeneral.HtmlColorSecondary) {
+        private fun bindSecondaryColor(htmlColor: HtmlColorGeneral.HtmlColorSecondary) {  // step 2 -- bind
             Log.d(TAG, "bindSecondaryColor")
             // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
-            (viewBinding as SecondaryColorItemBinding).secondaryColorFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
+            val viewBinding = SecondaryColorItemBinding.bind(innerView)
+            viewBinding.secondaryColorFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
             viewBinding.textView.text = htmlColor.hex
         }
 
@@ -55,14 +57,9 @@ class HtmlMultipleViewTypeAdapter:
         Log.d(TAG, "Layout ${layout.toString()} was chosen")
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(layout, parent, false)  // step 2 -- inflate
+            .inflate(layout, parent, false)  // step 1 -- inflate
 
-        val colorItemBinding = when(viewType) {
-            Constants.TYPE_COLOR_MAIN -> MainColorItemBinding.bind(view)  // step 1 -- bind  // FIXME
-            Constants.TYPE_COLOR_SECONDARY -> SecondaryColorItemBinding.bind(view)
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
-        return ViewHolder(view, colorItemBinding)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

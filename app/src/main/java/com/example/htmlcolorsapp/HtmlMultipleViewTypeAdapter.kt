@@ -17,13 +17,12 @@ class HtmlMultipleViewTypeAdapter:
 
     private val colorGeneralList = mutableListOf<HtmlColorGeneral>()   // Not in constructor
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
         private val TAG = "HtmlMultiViewHolderLog"
-        private val innerView = view  // TODO is that right???
 
         private fun bindMainColor(htmlColor: HtmlColorGeneral.HtmlColorMain) {
             // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
-            val viewBinding = MainColorItemBinding.bind(innerView)  // step 2 -- bind
+            val viewBinding = MainColorItemBinding.bind(view)  // step 2 -- bind
             viewBinding.colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
             viewBinding.colorHtmlTextView.text = htmlColor.htmlName
             viewBinding.colorHexTextView.text = htmlColor.hex
@@ -33,7 +32,7 @@ class HtmlMultipleViewTypeAdapter:
         private fun bindSecondaryColor(htmlColor: HtmlColorGeneral.HtmlColorSecondary) {  // step 2 -- bind
             Log.d(TAG, "bindSecondaryColor")
             // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
-            val viewBinding = SecondaryColorItemBinding.bind(innerView)
+            val viewBinding = SecondaryColorItemBinding.bind(view)
             viewBinding.secondaryColorFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
             viewBinding.textView.text = htmlColor.hex
         }

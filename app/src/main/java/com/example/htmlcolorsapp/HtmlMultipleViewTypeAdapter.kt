@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.example.htmlcolorsapp.databinding.MainColorItemBinding
+import com.example.htmlcolorsapp.databinding.SecondaryColorItemBinding
 import com.example.htmlcolorsapp.misc.Constants
 
 class HtmlMultipleViewTypeAdapter:
@@ -15,20 +17,23 @@ class HtmlMultipleViewTypeAdapter:
 
     private val colorGeneralList = mutableListOf<HtmlColorGeneral>()   // Not in constructor
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, passedViewBinding: ViewBinding): RecyclerView.ViewHolder(view) {
         private val TAG = "HtmlMultiViewHolderLog"
-        private val colorItemBinding = MainColorItemBinding.bind(view)  // step 1 -- bind
+        private val viewBinding: ViewBinding = passedViewBinding
 
-        private fun bindMainColor(htmlColor: HtmlColorGeneral.HtmlColorMain) = with(colorItemBinding) {
+        private fun bindMainColor(htmlColor: HtmlColorGeneral.HtmlColorMain) {
             // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
-            colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
-            colorHtmlTextView.text = htmlColor.htmlName
-            colorHexTextView.text = htmlColor.hex
-            colorRgbTextView.text = htmlColor.rgb
+            (viewBinding as MainColorItemBinding).colorItemFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
+            viewBinding.colorHtmlTextView.text = htmlColor.htmlName
+            viewBinding.colorHexTextView.text = htmlColor.hex
+            viewBinding.colorRgbTextView.text = htmlColor.rgb
         }
 
         private fun bindSecondaryColor(htmlColor: HtmlColorGeneral.HtmlColorSecondary) {
             Log.d(TAG, "bindSecondaryColor")
+            // or Color.rgb(1,1,1), or Color.valueOf(0xffff0000)
+            (viewBinding as SecondaryColorItemBinding).secondaryColorFrameLayout.setBackgroundColor(Color.parseColor(htmlColor.hex))
+            viewBinding.textView.text = htmlColor.hex
         }
 
         fun bind(htmlColorGeneral: HtmlColorGeneral) {
@@ -52,7 +57,12 @@ class HtmlMultipleViewTypeAdapter:
         val view = LayoutInflater.from(parent.context)
             .inflate(layout, parent, false)  // step 2 -- inflate
 
-        return ViewHolder(view)
+        val colorItemBinding = when(viewType) {
+            Constants.TYPE_COLOR_MAIN -> MainColorItemBinding.bind(view)  // step 1 -- bind  // FIXME
+            Constants.TYPE_COLOR_SECONDARY -> SecondaryColorItemBinding.bind(view)
+            else -> throw IllegalArgumentException("Invalid view type")
+        }
+        return ViewHolder(view, colorItemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 //            testRecyclerView.adapter = colorAdapter  // pass adapter to RecyclerView
             testRecyclerView.adapter = multViewColorAdapter
 
-            val dividerItemDecoration = DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
+            val dividerItemDecoration = DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL) // Divider orientation
             ResourcesCompat.getDrawable(resources, R.drawable.color_item_divider, null)
                 ?.let { drawable -> dividerItemDecoration.setDrawable(drawable) }
             // Variant 2:

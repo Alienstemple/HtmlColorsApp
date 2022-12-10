@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.htmlcolorsapp.data.HtmlColor
 import com.example.htmlcolorsapp.databinding.MainColorItemBinding
 
 class HtmlColorAdapter(private val colorArrayList: ArrayList<HtmlColor>):

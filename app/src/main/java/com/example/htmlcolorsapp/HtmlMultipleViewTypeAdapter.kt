@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
+import com.example.htmlcolorsapp.data.HtmlColorGeneral
 import com.example.htmlcolorsapp.databinding.MainColorItemBinding
 import com.example.htmlcolorsapp.databinding.SecondaryColorItemBinding
 import com.example.htmlcolorsapp.misc.Constants

@@ -1,4 +1,4 @@
-package com.example.htmlcolorsapp
+package com.example.htmlcolorsapp.data
 
 sealed class HtmlColorGeneral {
     data class HtmlColorMain (

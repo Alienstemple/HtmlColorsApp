@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.htmlcolorsapp.data.HtmlColor
 import com.example.htmlcolorsapp.data.HtmlColorGeneral
 import com.example.htmlcolorsapp.databinding.ActivityMainBinding
+import com.example.htmlcolorsapp.misc.MarginItemDecoration
 
 class MainActivity : AppCompatActivity() {
     lateinit var mainBinding: ActivityMainBinding
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity() {
 //            getDrawable(R.drawable.color_item_divider)?.let { dr -> dividerItemDecoration.setDrawable(dr) }
 
             testRecyclerView.addItemDecoration(dividerItemDecoration)
+            testRecyclerView.addItemDecoration(
+                MarginItemDecoration(
+                resources.getDimension(R.dimen.recycler_item_margin).toInt())
+            )
         }
     }
 }

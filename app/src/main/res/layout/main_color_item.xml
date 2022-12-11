@@ -8,8 +8,6 @@
         android:id="@+id/color_item_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="4dp"
         android:background="#C3BABA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

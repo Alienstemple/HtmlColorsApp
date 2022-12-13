@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.htmlcolorsapp.data.HtmlColorGeneral
 import com.example.htmlcolorsapp.databinding.MainColorItemBinding
@@ -77,6 +78,24 @@ class HtmlMultipleViewTypeAdapter:
         return when (colorGeneralList[position]) {
             is HtmlColorGeneral.HtmlColorMain -> Constants.TYPE_COLOR_MAIN
             is HtmlColorGeneral.HtmlColorSecondary -> Constants.TYPE_COLOR_SECONDARY
+        }
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        Log.d(TAG, "In onAttachedToRecyclerView, getting span")
+        super.onAttachedToRecyclerView(recyclerView)
+        (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup = getSpanSizeLookup()
+    }
+
+    private fun getSpanSizeLookup(): GridLayoutManager.SpanSizeLookup {
+        return object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (getItemViewType(position)) {
+                    Constants.TYPE_COLOR_MAIN -> Constants.SPAN_SIZE_MAIN
+                    Constants.TYPE_COLOR_SECONDARY -> Constants.SPAN_SIZE_SECONDARY
+                    else -> Constants.DEFAULT_SPAN_SIZE
+                }
+            }
         }
     }
 }

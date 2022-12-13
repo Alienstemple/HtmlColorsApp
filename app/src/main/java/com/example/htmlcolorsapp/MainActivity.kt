@@ -70,6 +70,10 @@ class MainActivity : AppCompatActivity() {
         mainBinding.apply {
             testRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, Constants.SPAN_SIZE)
             testRecyclerView.adapter = multViewColorAdapter
+            testRecyclerView.addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimension(R.dimen.recycler_item_margin).toInt())
+            )
         }
     }
 }

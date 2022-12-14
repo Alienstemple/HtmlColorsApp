@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.htmlcolorsapp.data.HtmlColorGeneral
@@ -67,10 +68,13 @@ class HtmlMultipleViewTypeAdapter:
     }
 
     fun setColorList(colorlist: ArrayList<HtmlColorGeneral>) {   // Setter instead of constructor
+        val diffUtilCallback = HtmlColorDiffUtil(colorGeneralList, colorlist)
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
         colorGeneralList.apply {
             clear()
             addAll(colorlist)
         }
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemCount() = colorGeneralList.size

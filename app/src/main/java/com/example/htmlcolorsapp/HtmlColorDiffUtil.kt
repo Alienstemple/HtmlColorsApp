@@ -2,10 +2,11 @@ package com.example.htmlcolorsapp
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.htmlcolorsapp.data.HtmlColorGeneral
+import kotlin.reflect.typeOf
 
 class HtmlColorDiffUtil(
-    private val oldList: ArrayList<HtmlColorGeneral>,
-    private val newList: ArrayList<HtmlColorGeneral>
+    private val oldList: MutableList<HtmlColorGeneral>,
+    private val newList: MutableList<HtmlColorGeneral>
     ) : DiffUtil.Callback(){
     override fun getOldListSize() = oldList.size
 
@@ -13,7 +14,7 @@ class HtmlColorDiffUtil(
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         // TODO
-        return (oldList[oldItemPosition] as HtmlColorGeneral.HtmlColorMain).hex == (newList[newItemPosition] as HtmlColorGeneral.HtmlColorMain).hex
+        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

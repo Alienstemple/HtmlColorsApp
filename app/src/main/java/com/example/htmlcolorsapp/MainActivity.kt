@@ -75,5 +75,11 @@ class MainActivity : AppCompatActivity() {
                     resources.getDimension(R.dimen.recycler_item_margin).toInt())
             )
         }
+
+        mainBinding.addColorButton.setOnClickListener {
+            htmlMultiViewColorList.add(0, HtmlColorGeneral.HtmlColorMain("Blue", "#0000FF", "0, 0, 255"))
+            multViewColorAdapter.setColorList(htmlMultiViewColorList)
+        }
+
     }
 }
